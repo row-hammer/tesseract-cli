@@ -10,6 +10,7 @@ Around 500 lines of plain C, no dependencies beyond ncurses.
 ![C](https://img.shields.io/badge/C-gnu99-A8B9CC?logo=c&logoColor=white)
 ![ncurses](https://img.shields.io/badge/UI-ncurses-2E7D32)
 ![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20macOS-555555)
+![License](https://img.shields.io/badge/license-MIT-blue)
 
 <img src="sk.gif" alt="A rotating tesseract drawn in ASCII in a terminal" width="560">
 
@@ -25,7 +26,8 @@ Around 500 lines of plain C, no dependencies beyond ncurses.
   its own camera, as in Hollasch's thesis.
 - **Clean ASCII lines.** All 32 edges are drawn with Bresenham's algorithm, choosing `_` `-` `|` `/` `\` from
   the local slope, with `@` at the vertices.
-- **Tiny and portable.** One C file, a short Makefile, ncurses for the screen.
+- **Tiny and portable.** One C file, a short Makefile, ncurses for the screen. Builds cleanly with
+  `-Wall -Wextra -Werror`, including Ubuntu's stricter format checks.
 
 ## How it works
 
@@ -67,20 +69,21 @@ Press any key to quit. The picture is 100 × 50 characters, so make the terminal
 | File | What it is |
 |---|---|
 | `main.c` | everything: 4D and 3D math, the two projections, line drawing, the ncurses loop |
-| `Makefile` | builds `hypercube` with `-Wall -Wextra -Werror -O3` |
-| `hypercube.vcxproj` | an old Visual Studio project; the code now uses ncurses, so it needs a POSIX system |
+| `Makefile` | `make` builds `hypercube` (`-Wall -Wextra -Werror -O3`), `make clean` removes it |
 | `sk.gif` | the demo above |
+
+`CC` and `CFLAGS` can be set from the command line, e.g. `make CC=clang`.
 
 ## Troubleshooting
 
 | Symptom | Fix |
 |---|---|
 | `ncurses.h: No such file or directory` | Install the ncurses development package (see Quick start). |
-| `format not a string literal and no format arguments` | Your compiler enables `-Wformat-security` (Ubuntu does). Build with `make CFLAGS="-O3 -std=gnu99"` for now. |
 | Only part of the tesseract is visible | The terminal is smaller than 100 × 50: enlarge it or zoom out. |
 
 ---
 
 <div align="center">
-<sub>Based on <a href="https://hollasch.github.io/ray4/Four-Space_Visualization_of_4D_Objects.html#chapter4">Four-Space Visualization of 4D Objects</a> by Steven Hollasch (1991).</sub>
+<sub>Based on <a href="https://hollasch.github.io/ray4/Four-Space_Visualization_of_4D_Objects.html#chapter4">Four-Space Visualization of 4D Objects</a> by Steven Hollasch (1991).<br/>
+MIT licensed, see <a href="LICENSE">LICENSE</a>.</sub>
 </div>
