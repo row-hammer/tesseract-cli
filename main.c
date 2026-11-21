@@ -489,7 +489,8 @@ int main()
 
         werase(w);
         wattron(w, COLOR_PAIR(1));
-        wprintw(w, d);
+        // d is a fixed-size grid, not a string: no terminating NUL, and never a format
+        waddnstr(w, d, ww * wh);
         box(w, 0 , 0);
         wrefresh(w);
 
