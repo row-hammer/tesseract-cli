@@ -1,0 +1,8 @@
+# build output
+hypercube
+*.o
+
+# editors and IDEs
+.vs/
+.vscode/
+*.swp

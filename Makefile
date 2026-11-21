@@ -1,11 +1,16 @@
 PROG = hypercube
-
-CC = cc
-
-LIBS = -lm -lncurses
-CFLAGS = -Wall -Werror -Wextra -O3 -std=gnu99
-
 SRC = main.c
 
-all:
-	$(CC) main.c -o $(PROG) $(CFLAGS) $(LIBS)
+CC ?= cc
+CFLAGS ?= -Wall -Wextra -Werror -O3 -std=gnu99
+LIBS = -lm -lncurses
+
+.PHONY: all clean
+
+all: $(PROG)
+
+$(PROG): $(SRC)
+	$(CC) $(SRC) -o $(PROG) $(CFLAGS) $(LIBS)
+
+clean:
+	rm -f $(PROG)
